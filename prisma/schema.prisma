@@ -19,16 +19,16 @@ datasource db {
 
 /// Phân quyền tài khoản quản trị
 enum Role {
-  ADMIN  // Toàn quyền CMS
+  ADMIN // Toàn quyền CMS
   EDITOR // Chỉ quản lý nội dung
 }
 
 /// Loại nội dung trang Giới thiệu
 enum IntroSectionType {
-  GENERAL     // Giới thiệu chung
-  FIELDS      // Lĩnh vực hoạt động
-  VISION      // Tầm nhìn
-  MISSION     // Sứ mệnh
+  GENERAL // Giới thiệu chung
+  FIELDS // Lĩnh vực hoạt động
+  VISION // Tầm nhìn
+  MISSION // Sứ mệnh
   CORE_VALUES // Giá trị cốt lõi
 }
 
@@ -40,8 +40,8 @@ enum ProductCategoryType {
 
 /// Lĩnh vực giải pháp (thay thế bảng solution_categories)
 enum SolutionFieldType {
-  TELECOM           // Chuyên ngành viễn thông
-  IT                // Công nghệ thông tin
+  TELECOM // Chuyên ngành viễn thông
+  IT // Công nghệ thông tin
   DIGITAL_TRANSFORM // Chuyển đổi số
 }
 
@@ -49,14 +49,14 @@ enum SolutionFieldType {
 enum NewsCategory {
   COMPANY // Tin tức công ty
   INDUSTRY // Tin tức ngành
-  EVENT   // Sự kiện
-  TECH    // Công nghệ
+  EVENT // Sự kiện
+  TECH // Công nghệ
 }
 
 /// Phân loại đối tác
 enum PartnerType {
   CUSTOMER // Khách hàng
-  PARTNER  // Đối tác
+  PARTNER // Đối tác
 }
 
 // =============================================================================
@@ -90,8 +90,10 @@ model HomeSlideshow {
   id         String   @id @default(uuid())
   titleVi    String   @map("title_vi")
   titleEn    String?  @map("title_en")
-  subtitleVi String?  @map("subtitle_vi")
+  subtitleVi String?  @map("subtitle_vi") // có thể chứa HTML
   subtitleEn String?  @map("subtitle_en")
+  ctaVi      String?  @map("cta_vi") // ← thêm mới: "Giới thiệu"
+  ctaEn      String?  @map("cta_en") // ← thêm mới: "Learn more"
   imageUrl   String   @map("image_url")
   linkUrl    String?  @map("link_url")
   order      Int      @default(0)
@@ -322,19 +324,19 @@ model Service {
 
 /// Bài viết tin tức — dùng enum category thay vì bảng news_categories riêng
 model News {
-  id           String      @id @default(uuid())
-  authorId     String      @map("author_id")
+  id           String       @id @default(uuid())
+  authorId     String       @map("author_id")
   category     NewsCategory
-  titleVi      String      @map("title_vi")
-  titleEn      String?     @map("title_en")
-  slug         String      @unique
-  contentVi    String      @map("content_vi") @db.Text
-  contentEn    String?     @map("content_en") @db.Text
-  thumbnailUrl String?     @map("thumbnail_url")
-  isPublished  Boolean     @default(false) @map("is_published")
-  publishedAt  DateTime?   @map("published_at")
-  createdAt    DateTime    @default(now()) @map("created_at")
-  updatedAt    DateTime    @updatedAt @map("updated_at")
+  titleVi      String       @map("title_vi")
+  titleEn      String?      @map("title_en")
+  slug         String       @unique
+  contentVi    String       @map("content_vi") @db.Text
+  contentEn    String?      @map("content_en") @db.Text
+  thumbnailUrl String?      @map("thumbnail_url")
+  isPublished  Boolean      @default(false) @map("is_published")
+  publishedAt  DateTime?    @map("published_at")
+  createdAt    DateTime     @default(now()) @map("created_at")
+  updatedAt    DateTime     @updatedAt @map("updated_at")
 
   // Relations
   author User @relation(fields: [authorId], references: [id])

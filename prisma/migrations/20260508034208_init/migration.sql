@@ -37,6 +37,8 @@ CREATE TABLE "home_slideshows" (
     "title_en" TEXT,
     "subtitle_vi" TEXT,
     "subtitle_en" TEXT,
+    "cta_vi" TEXT,
+    "cta_en" TEXT,
     "image_url" TEXT NOT NULL,
     "link_url" TEXT,
     "order" INTEGER NOT NULL DEFAULT 0,
